@@ -1,0 +1,25 @@
+html {
+  background-image: linear-gradient(#ffe6e6,#ffffcc);
+}
+
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px 25px 25px 25px;
+}
+
+.cursive {
+  text-align: center;
+  font-family: Apple Chancery, cursive;
+  margin-left:12%;
+  margin-right:12%;
+}
+
+.text_box {
+  text-align: center;
+}
+
+.btn {
+  text-align: center;
+}

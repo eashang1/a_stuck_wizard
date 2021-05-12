@@ -19,14 +19,20 @@
     </b>
   </p>
 
+  <!-- Create fake guess button -->
+  <p id = "fake_btn" class = btn style = "display: block">
+      <script type="text/javascript" src="sequence.js"></script>
+      <button class="sequence", onclick="random()">Guess!</button>
+  </p>
+
   <!-- Take input -->
-  <p class = text_box>
+  <p id = "input" class = text_box style = "display: none">
       <input style="font-size:25px", type = "text", size = "50",
       placeholder="What cards did you remove?", id = "user_input">
   </p>
 
-  <!-- Create input box and guess button -->
-  <p class = btn>
+  <!-- Create real guess button -->
+  <p id = "real_btn" class = btn style = "display: none">
       <script type="text/javascript" src="sequence.js"></script>
       <button class="sequence", onclick="solve()">Guess!</button>
   </p>

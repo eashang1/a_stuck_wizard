@@ -9,10 +9,10 @@ Uses a De Bruijn sequence arrangement of a deck of cards to perform a magic tric
 
 4) Pick any five consecutive cards
 
-5) Now among your five cards, you will have one color that is more common and one that is less common. Remove the cards at locations with the less common color and enter these locations followed by 0. For example, if your sequence is 30130, you would remove clubs/spades, so you would enter 250.
+5) Now among your five cards, you will have one color that is more common and one that is less common. Remove the cards at locations with the less common color and enter these locations followed by '.'. For example, if your sequence is 30130, you would remove clubs/spades, so you would enter '25.'.
 
-6) Now you have two remaining suits. Pick the least common and remove cards of that suit. Enter the corresponding locations followed by 0. If your original sequence was 30130, you would have hearts/diamonds remaining after step 4. There are no diamonds, so this is the least common. Since there are none, you would just enter 0. If there were diamonds you would enter their locations in the original hand and then 0.
+6) Now you have two remaining suits. Pick the least common and remove cards of that suit. Enter the corresponding locations followed by '.'. If your original sequence was 30130, you would have hearts/diamonds remaining after step 4, so your hand would be 00. There are no diamonds, so this is the least common suit. Since there are none, you would just enter '.'. If there were diamonds you would enter their locations in your current hand and then '.'.
 
-7) Now pick one of your remaining cards and enter its location. For the hand 30130 you would have hearts remaining at locations 2 and 5. You can enter either of these.
+7) Now pick one of your remaining cards and enter its location. For the hand 30130 you would have hearts remaining at locations 1 and 2 (as your hand would be 00). You can enter either of these.
 
 8) Click guess and the magician stuck on this website will guess your card!

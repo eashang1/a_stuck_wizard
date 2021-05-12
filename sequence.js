@@ -77,6 +77,9 @@ function solve()
       else {
         if(remaining.has(j)) {
           left_over.add(cur_card);
+          if(cur_card == suit) {
+            done = true;
+          }
         }
       }
     }
@@ -85,11 +88,13 @@ function solve()
       done = true;
     }
 
+
     // Sets index
     // If previous conditions are met, we have a match, so we get the index of
     // our desired card
     cur++;
     if(!done) {
+      console.log(i);
       ind = (i+(cards[cur]-'0')-1)%52;
       suit_ans = de_bruijn[ind];
       break;
@@ -143,7 +148,6 @@ function solve()
 // Outputs random answer
 function random() {
   ans = "";
-  console.log("hit");
   print_ans = "";
   num_ans = Math.floor(Math.random()*13)+1;
   if(num_ans == 1) {
@@ -210,7 +214,6 @@ function reveal() {
 // Hide input box for user
 function hide() {
   cards = document.getElementById("user_input").value
-  console.log(cards);
 
   var input = document.getElementById("input");
   input.style.display = "none";

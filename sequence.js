@@ -94,7 +94,6 @@ function solve()
     // our desired card
     cur++;
     if(!done) {
-      console.log(i);
       ind = (i+(cards[cur]-'0')-1)%52;
       suit_ans = de_bruijn[ind];
       break;
@@ -143,6 +142,12 @@ function solve()
   }
 
   document.getElementById("result").placeholder = ans;
+
+  var fake = document.getElementById("fake_btn");
+  fake.style.display = "block";
+
+  var final = document.getElementById("final_btn");
+  final.style.display = "none";
 }
 
 // Outputs random answer

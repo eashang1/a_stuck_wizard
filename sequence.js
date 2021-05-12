@@ -4,12 +4,16 @@ function solve()
   var ans = "";
 
   // 0,1,2,3 represents heart, clubs, diamonds, and spades respectively
-  // Numerical values are assigned in the order A,2,3,4,5,6,7,8,9,10,J,Q,K
+  // Numerical values are assigned in the order:
+  // Hearts:
+  // Clubs:
+  // Diamonds:
+  // Spades:
   var de_bruijn = [3, 0, 1, 3, 0, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2,
     2, 0, 2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 1, 1, 3, 2, 1, 0, 0, 3, 2, 2, 0, 0, 0,
     2, 2, 1, 2, 3, 1, 3];
 
-  // Finds the index of the card we want
+  // Finds the index of the card we wasnt
   ind = 0;
   suit_ans = -1;
   for (var i = 0; i < de_bruijn.length; i++) {
@@ -134,3 +138,86 @@ function solve()
 
   document.getElementById("result").placeholder = ans;
 }
+
+// Outputs random answer
+function random() {
+  ans = "";
+  console.log("hit");
+  print_ans = "";
+  num_ans = Math.floor(Math.random()*13)+1;
+  if(num_ans == 1) {
+    print_ans = "Ace";
+  }
+  else if(num_ans == 11) {
+    print_ans = "Jack";
+  }
+  else if(num_ans == 12) {
+    print_ans = "Queen";
+  }
+  else if(num_ans == 13) {
+    print_ans = "King"
+  }
+  else {
+    print_ans += num_ans;
+  }
+
+  ans += "the " + print_ans;
+
+  suit_ans = Math.floor(Math.random()*4);
+  if(suit_ans == 0) {
+    ans += " of Hearts!";
+  }
+  else if(suit_ans == 1) {
+    ans += " of Clubs!";
+  }
+  else if(suit_ans == 2) {
+    ans += " of Diamonds!";
+  }
+  else {
+    ans += " of Spades!";
+  }
+
+  document.getElementById("result").placeholder = ans;
+}
+
+//Toggles between real and fake screens
+var toggled = false;
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'w') {
+    reveal();
+    toggled = true;
+  }
+  else if(!toggled){
+    random();
+  }
+})
+
+function reveal() {
+  document.getElementById("result").placeholder = "Hmmm... your card is the...";
+
+  var fake = document.getElementById("fake_btn");
+  fake.style.display = "none";
+
+  var real = document.getElementById("real_btn");
+  real.style.display = "block";
+
+  var input = document.getElementById("input");
+  input.style.display = "block";
+}
+
+// Swiches card decks
+document.addEventListener('keydown', function(e) {
+  if(e.key === 's') {
+    de_bruijn = [3, 0, 1, 3, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2, 2, 0,
+      2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 0, 1, 1, 3, 2, 0, 0, 3, 2, 2, 0, 0, 0, 2, 2,
+      1, 2, 3, 3];
+    random();
+  }
+
+  if(e.key === 'p') {
+    de_bruijn = [3, 0, 1, 3, 0, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2,
+      2, 0, 2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 1, 1, 3, 2, 1, 0, 0, 3, 2, 2, 0, 0, 0,
+      2, 2, 1, 2, 3, 1, 3];
+    random();
+  }
+})

@@ -8,10 +8,10 @@ function solve()
 
   // 0,1,2,3 represents heart, clubs, diamonds, and spades respectively
   // Numerical values are assigned in the order:
-  // Hearts:
-  // Clubs:
-  // Diamonds:
-  // Spades:
+  // Hearts: A23456789JQK
+  // Clubs:  A23456789JQK
+  // Diamonds:  A23456789JQK
+  // Spades:  A23456789JQK
   var de_bruijn = [3, 0, 1, 3, 0, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2,
     2, 0, 2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 1, 1, 3, 2, 1, 0, 0, 3, 2, 2, 0, 0, 0,
     2, 2, 1, 2, 3, 1, 3];
@@ -29,7 +29,7 @@ function solve()
     parity = -1;
     locations = new Set();
     remaining = new Set([1,2,3,4,5])
-    while(cards[cur] != 0) {
+    while(cards[cur] != '.') {
       locations.add(cards[cur]-'0');
       remaining.delete(cards[cur]-'0');
       parity = de_bruijn[(i+(cards[cur]-'0')-1)%52]%2;
@@ -60,16 +60,22 @@ function solve()
     suit = -1;
     locations.clear();
     left_over = new Set();
-    while(cards[cur] != 0) {
-      locations.add(cards[cur]-'0');
+    while(cards[cur] != '.') {
+      var val = (cards[cur]-'0');
+      for (var j = 1; j < val; j++) {
+        if(!remaining.has(j)) {
+          val++;
+        }
+      }
+      locations.add(val);
       suit = de_bruijn[(i+(cards[cur]-'0')-1)%52];
       cur++;
     }
 
-
     for (var j = 1; j <= 5; j++) {
       cur_card = de_bruijn[(i+j-1)%52];
       if(locations.has(j)) {
+        remaining.delete(j);
         if(cur_card != suit) {
           done = true;
         }
@@ -88,15 +94,20 @@ function solve()
       done = true;
     }
 
-
     // Sets index
     // If previous conditions are met, we have a match, so we get the index of
     // our desired card
     cur++;
+    var res = (cards[cur]-'0');
+    for (var j = 1; j <= res; j++) {
+      if(!remaining.has(j)) {
+        res++;
+      }
+    }
+
     if(!done) {
-      ind = (i+(cards[cur]-'0')-1)%52;
+      ind = (i+res-1)%52;
       suit_ans = de_bruijn[ind];
-      break;
     }
   }
 

@@ -1,3 +1,6 @@
+// Holds the user input
+var cards;
+
 function solve()
 {
   var cards = document.getElementById("user_input").value
@@ -48,8 +51,6 @@ function solve()
         }
       }
     }
-
-    if(!done){console.log(i);}
 
     // Check suits
     // Creates a set of the removed cards and makes sure they are the same
@@ -192,6 +193,7 @@ document.addEventListener('keydown', function(e) {
   }
 })
 
+// Changes state to real version
 function reveal() {
   document.getElementById("result").placeholder = "Hmmm... your card is the...";
 
@@ -203,6 +205,21 @@ function reveal() {
 
   var input = document.getElementById("input");
   input.style.display = "block";
+}
+
+// Hide input box for user
+function hide() {
+  cards = document.getElementById("user_input").value
+  console.log(cards);
+
+  var input = document.getElementById("input");
+  input.style.display = "none";
+
+  var real = document.getElementById("real_btn");
+  real.style.display = "none";
+
+  var final = document.getElementById("final_btn");
+  final.style.display = "block";
 }
 
 // Swiches card decks

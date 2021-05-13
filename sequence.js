@@ -52,6 +52,7 @@ function solve()
       }
     }
 
+
     // Check suits
     // Creates a set of the removed cards and makes sure they are the same
     // suit (and that those cards not in the set that were not previously
@@ -68,7 +69,7 @@ function solve()
         }
       }
       locations.add(val);
-      suit = de_bruijn[(i+(cards[cur]-'0')-1)%52];
+      suit = de_bruijn[(i+val-1)%52];
       cur++;
     }
 

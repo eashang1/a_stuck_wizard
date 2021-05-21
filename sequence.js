@@ -1,35 +1,37 @@
 // Holds the user input
 var cards;
+var hit = false;
+var toggled = false;
+
+// 0,1,2,3 represents diamonds, spades, hearts, clubs respectively
+// Number order is assigned by corresponding index in the array "nums"
+var de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1,
+  2, 0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3,
+  2, 2, 0, 1, 3, 0, 1];
+
+var nums = ["Jack", "7", "4", "2", "3", "9", "King", "Queen", "3", "6",
+  "King", "7", "King", "4", "8", "Jack", "8", "Ace", "5", "6", "5", "8",
+  "King", "2", "4", "10", "3", "Ace", "Jack", "5", "3", "Queen", "9", "10",
+  "9", "7", "2", "9", "Queen", "6", "7", "4", "Jack", "Ace", "6", "8", "2",
+  "10", "Ace", "5", "Queen", "10"];
 
 function solve()
 {
   var ans = "";
 
-  // 0,1,2,3 represents diamonds, spades, hearts, clubs respectively
-  // Number order is assigned by corresponding index in the array "nums"
-  var de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1,
-    2, 0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3,
-    2, 2, 0, 1, 3, 0, 1];
-
-  var nums = ["Jack", "7", "4", "2", "3", "9", "King", "Queen", "3", "6",
-    "King", "7", "King", "4", "8", "Jack", "8", "Ace", "5", "6", "5", "8",
-    "King", "2", "4", "10", "3", "Ace", "Jack", "5", "3", "Queen", "9", "10",
-    "9", "7", "2", "9", "Queen", "6", "7", "4", "Jack", "Ace", "6", "8", "2",
-    "10", "Ace", "5", "Queen", "10"];
-
   // Finds the index of the card we wasnt
-  ind = 0;
-  suit_ans = -1;
+  var ind = -1;
+  var suit_ans = -1;
   for (var i = 0; i < de_bruijn.length; i++) {
     var done = false;
 
     // Checks color
     // Creates a set of the removed cards and makes sure they are the same
     // parity (and that those cards not in the set are also the same parity)
-    cur = 0;
-    parity = -1;
-    locations = new Set();
-    remaining = new Set([1,2,3,4,5])
+    var cur = 0;
+    var parity = -1;
+    var locations = new Set();
+    var remaining = new Set([1,2,3,4,5])
     while(cards[cur] != '.') {
       locations.add(cards[cur]-'0');
       remaining.delete(cards[cur]-'0');
@@ -59,7 +61,7 @@ function solve()
     // suit (and that those cards not in the set that were not previously
     // removed are also the same parity)
     cur++;
-    suit = -1;
+    var suit = -1;
     locations.clear();
     left_over = new Set();
     while(cards[cur] != '.') {
@@ -141,59 +143,178 @@ function solve()
   final.style.display = "none";
 }
 
-// If input isn't valid, error message is displayed, else trick continues
-function valid() {
+// Makes sure input format is correct
+function format() {
   var invalid = false;
-
   cards = document.getElementById("user_input").value;
-  console.log(cards);
 
-  var cur = 0;
-  var removed = 0;
-
-  freq = new Map();
-  for (var i = 0; i < cards.length; i++) {
-    freq[cards[i]]++;
-    if(cards[i] != '.' && (cards[i] > '5' || cards[i] < '1')) {
-      invalid = true;
-    }
-  }
-
-  if(freq['.'] < 2) {
+  if(cards.length < 3) {
     invalid = true;
   }
+  else {
+    var cur = 0;
+    var removed = 0;
 
-  if(! invalid) {
-    while(cards[cur] != '.') {
-
-      if((cards[cur]-'0') > 5-removed) {
+    var freq = 0;
+    for (var i = 0; i < cards.length; i++) {
+      if(cards[i] == '.') {
+        freq++;
+      }
+      if(cards[i] != '.' && (cards[i] > '5' || cards[i] < '1')) {
         invalid = true;
       }
-
-      cur++
-      removed++;
     }
 
-    while(cards[cur] != '.') {
+    if(freq < 2) {
+      invalid = true;
+    }
 
-      if((cards[cur]-'0') > 5-removed) {
-        invalid = true;
+    var first = 0;
+    if(!invalid) {
+      while(cards[cur] != '.') {
+
+        if((cards[cur]-'0') > 5-removed) {
+          invalid = true;
+        }
+
+        cur++
+        first++;
       }
 
-      cur++
-      removed++;
-    }
+      cur++;
+      removed += first;
+      var second = 0;
+      while(cards[cur] != '.') {
 
-    cur++;
-    if(cur >= cards.length) {
-      invalid = true;
-    }
-    else if(cards[cur] == '.' || (cards[cur]-'0') > 5-removed) {
-      invalid = true;
+        if((cards[cur]-'0') > 5-removed) {
+          invalid = true;
+        }
+
+        cur++
+        second++;
+      }
+
+      cur++;
+      removed += second;
+      if(cur >= cards.length) {
+        invalid = true;
+      }
+      else if(cards[cur] == '.' || (cards[cur]-'0') > 5-removed) {
+        invalid = true;
+      }
     }
   }
 
+
+
   if(invalid) {
+    error_msg = "The input sequence is invalid. Please enter another code.";
+    document.getElementById("user_input").value = "";
+    document.getElementById("user_input").placeholder = error_msg;
+  }
+  else {
+    valid();
+  }
+}
+
+function valid() {
+  // Finds the index of the card we wasnt
+  var ind = -1;
+  var suit_ans = -1;
+  for (var i = 0; i < de_bruijn.length; i++) {
+    var done = false;
+
+    // Checks color
+    // Creates a set of the removed cards and makes sure they are the same
+    // parity (and that those cards not in the set are also the same parity)
+    var cur = 0;
+    var parity = -1;
+    var locations = new Set();
+    var remaining = new Set([1,2,3,4,5])
+    while(cards[cur] != '.') {
+      locations.add(cards[cur]-'0');
+      remaining.delete(cards[cur]-'0');
+      parity = de_bruijn[(i+(cards[cur]-'0')-1)%52]%2;
+      cur++;
+    }
+
+    if(parity != -1) {
+      for (var j = 1; j <= 5; j++) {
+        cur_card = de_bruijn[(i+j-1)%52];
+        if(locations.has(j)) {
+          if(cur_card%2 != parity) {
+            done = true;
+          }
+        }
+        else {
+          if(cur_card%2 == parity) {
+            done = true;
+          }
+        }
+      }
+    }
+
+
+    // Check suits
+    // Creates a set of the removed cards and makes sure they are the same
+    // suit (and that those cards not in the set that were not previously
+    // removed are also the same parity)
+    cur++;
+    var suit = -1;
+    locations.clear();
+    left_over = new Set();
+    while(cards[cur] != '.') {
+      var val = (cards[cur]-'0');
+      for (var j = 1; j < val; j++) {
+        if(!remaining.has(j)) {
+          val++;
+        }
+      }
+      locations.add(val);
+      suit = de_bruijn[(i+val-1)%52];
+      cur++;
+    }
+
+    for (var j = 1; j <= 5; j++) {
+      cur_card = de_bruijn[(i+j-1)%52];
+      if(locations.has(j)) {
+        remaining.delete(j);
+        if(cur_card != suit) {
+          done = true;
+        }
+      }
+      else {
+        if(remaining.has(j)) {
+          left_over.add(cur_card);
+          if(cur_card == suit) {
+            done = true;
+          }
+        }
+      }
+    }
+
+    if(left_over.size > 1) {
+      done = true;
+    }
+
+    // Sets index
+    // If previous conditions are met, we have a match, so we get the index of
+    // our desired card
+    cur++;
+    var res = (cards[cur]-'0');
+    for (var j = 1; j <= res; j++) {
+      if(!remaining.has(j)) {
+        res++;
+      }
+    }
+
+    if(!done) {
+      ind = (i+res-1)%52;
+      suit_ans = de_bruijn[ind];
+    }
+  }
+
+  if(ind == -1) {
     error_msg = "The input sequence is invalid. Please enter another code.";
     document.getElementById("user_input").value = "";
     document.getElementById("user_input").placeholder = error_msg;
@@ -240,11 +361,11 @@ function random() {
     ans += " of Clubs!";
   }
 
+  toggled = false;
   document.getElementById("result").placeholder = ans;
 }
 
 //Toggles between real and fake screens
-var toggled = false;
 document.addEventListener('keydown', function(e) {
   if(e.key === 'w') {
     reveal();
@@ -255,7 +376,7 @@ document.addEventListener('keydown', function(e) {
 // Allows user to use 'Enter' button
 document.addEventListener('keydown', function(f) {
   if(f.key === 'Enter' && toggled) {
-    hide();
+    format();
   }
 })
 
@@ -299,18 +420,16 @@ function hide() {
 }
 
 // Swiches card decks
-document.addEventListener('keydown', function(e) {
-  if(e.key === 's') {
+document.addEventListener('keydown', function(g) {
+  if(g.key === 's') {
     de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1, 2,
       0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3, 2,
       2, 0, 1, 3, 0, 1];
-    random();
   }
 
-  if(e.key === 'p') {
+  if(g.key === 'p') {
     de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1, 2, 0,
       3, 0, 1, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3, 2, 2, 0,
       1, 3, 0, 1];
-    random();
   }
 })

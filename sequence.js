@@ -6,15 +6,16 @@ function solve()
   var cards = document.getElementById("user_input").value
   var ans = "";
 
-  // 0,1,2,3 represents heart, clubs, diamonds, and spades respectively
-  // Numerical values are assigned in the order:
-  // Hearts: A23456789JQK
-  // Clubs:  A23456789JQK
-  // Diamonds:  A23456789JQK
-  // Spades:  A23456789JQK
-  var de_bruijn = [3, 0, 1, 3, 0, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2,
-    2, 0, 2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 1, 1, 3, 2, 1, 0, 0, 3, 2, 2, 0, 0, 0,
-    2, 2, 1, 2, 3, 1, 3];
+  // 0,1,2,3 represents diamonds, spades, hearts, clubs respectively
+  // Number order is assigned by corresponding index in the array "nums"
+  var de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1,
+    2, 0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3,
+    2, 2, 0, 1, 3, 0, 1];
+
+  var nums = ["J", "7", "4", "2", "3", "9", "K", "Q", "3", "6", "K", "7", "K",
+    "4", "8", "J", "8", "A", "5", "6", "5", "8", "K", "2", "4", "10", "3", "A",
+    "J", "5", "3", "Q", "9", "10", "9", "7", "2", "9", "Q", "6", "7", "4", "J",
+    "A", "6", "8", "2", "10", "A", "5", "Q", "10"];
 
   // Finds the index of the card we wasnt
   ind = 0;
@@ -113,44 +114,22 @@ function solve()
   }
 
   // Gets the number of the card corresponding to the index
-  num_ans = 0;
-  for (var i = 0; i <= ind; i++) {
-    if(de_bruijn[i] == suit_ans) {
-      num_ans++;
-    }
-  }
+  num_ans = nums[ind];
 
-  //Prints results
-  print_ans = "";
-  if(num_ans == 1) {
-    print_ans = "Ace";
-  }
-  else if(num_ans == 11) {
-    print_ans = "Jack";
-  }
-  else if(num_ans == 12) {
-    print_ans = "Queen";
-  }
-  else if(num_ans == 13) {
-    print_ans = "King"
-  }
-  else {
-    print_ans += num_ans;
-  }
-
-  ans += "the " + print_ans;
+  // Make and print answer string
+  ans += "The " + num_ans;
 
   if(suit_ans == 0) {
-    ans += " of Hearts!";
-  }
-  else if(suit_ans == 1) {
-    ans += " of Clubs!";
-  }
-  else if(suit_ans == 2) {
     ans += " of Diamonds!";
   }
-  else {
+  else if(suit_ans == 1) {
     ans += " of Spades!";
+  }
+  else if(suit_ans == 2) {
+    ans += " of Hearts!";
+  }
+  else {
+    ans += " of Clubs!";
   }
 
   document.getElementById("result").placeholder = ans;
@@ -183,20 +162,20 @@ function random() {
     print_ans += num_ans;
   }
 
-  ans += "the " + print_ans;
+  ans += "The " + print_ans;
 
   suit_ans = Math.floor(Math.random()*4);
   if(suit_ans == 0) {
-    ans += " of Hearts!";
-  }
-  else if(suit_ans == 1) {
-    ans += " of Clubs!";
-  }
-  else if(suit_ans == 2) {
     ans += " of Diamonds!";
   }
-  else {
+  else if(suit_ans == 1) {
     ans += " of Spades!";
+  }
+  else if(suit_ans == 2) {
+    ans += " of Hearts!";
+  }
+  else {
+    ans += " of Clubs!";
   }
 
   document.getElementById("result").placeholder = ans;
@@ -209,14 +188,25 @@ document.addEventListener('keydown', function(e) {
     reveal();
     toggled = true;
   }
-  else if(!toggled){
-    random();
+})
+
+// Allows user to use 'Enter' button
+document.addEventListener('keydown', function(f) {
+  if(f.key === 'Enter' && toggled) {
+    hide();
   }
 })
 
 // Changes state to real version
 function reveal() {
-  document.getElementById("result").placeholder = "Hmmm... your card is the...";
+
+  document.getElementById("result").placeholder = "Hmmm... your card is...";
+
+  var img = document.getElementById("wiz");
+  img.style.display = "none";
+
+  var res = document.getElementById("res");
+  res.style.display = "none";
 
   var fake = document.getElementById("fake_btn");
   fake.style.display = "none";
@@ -232,6 +222,12 @@ function reveal() {
 function hide() {
   cards = document.getElementById("user_input").value
 
+  var img = document.getElementById("wiz");
+  img.style.display = "block";
+
+  var res = document.getElementById("res");
+  res.style.display = "block";
+
   var input = document.getElementById("input");
   input.style.display = "none";
 
@@ -245,16 +241,16 @@ function hide() {
 // Swiches card decks
 document.addEventListener('keydown', function(e) {
   if(e.key === 's') {
-    de_bruijn = [3, 0, 1, 3, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2, 2, 0,
-      2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 0, 1, 1, 3, 2, 0, 0, 3, 2, 2, 0, 0, 0, 2, 2,
-      1, 2, 3, 3];
+    de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1, 2,
+      0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3, 2,
+      2, 0, 1, 3, 0, 1];
     random();
   }
 
   if(e.key === 'p') {
-    de_bruijn = [3, 0, 1, 3, 0, 2, 3, 2, 3, 1, 1, 0, 0, 0, 3, 2, 1, 2, 3, 2,
-      2, 0, 2, 0, 3, 3, 1, 0, 1, 1, 1, 3, 1, 1, 3, 2, 1, 0, 0, 3, 2, 2, 0, 0, 0,
-      2, 2, 1, 2, 3, 1, 3];
+    de_bruijn = [1, 1, 3, 3, 0, 0, 0, 1, 0, 2, 2, 1, 0, 3, 0, 1, 0, 0, 1, 2, 0,
+      3, 0, 1, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3, 2, 2, 0,
+      1, 3, 0, 1];
     random();
   }
 })

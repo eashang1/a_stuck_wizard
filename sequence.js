@@ -3,7 +3,6 @@ var cards;
 
 function solve()
 {
-  var cards = document.getElementById("user_input").value
   var ans = "";
 
   // 0,1,2,3 represents diamonds, spades, hearts, clubs respectively
@@ -12,10 +11,11 @@ function solve()
     2, 0, 3, 0, 1, 2, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 1, 2, 3, 2, 0, 2, 2, 2, 3,
     2, 2, 0, 1, 3, 0, 1];
 
-  var nums = ["J", "7", "4", "2", "3", "9", "K", "Q", "3", "6", "K", "7", "K",
-    "4", "8", "J", "8", "A", "5", "6", "5", "8", "K", "2", "4", "10", "3", "A",
-    "J", "5", "3", "Q", "9", "10", "9", "7", "2", "9", "Q", "6", "7", "4", "J",
-    "A", "6", "8", "2", "10", "A", "5", "Q", "10"];
+  var nums = ["Jack", "7", "4", "2", "3", "9", "King", "Queen", "3", "6",
+    "King", "7", "King", "4", "8", "Jack", "8", "Ace", "5", "6", "5", "8",
+    "King", "2", "4", "10", "3", "Ace", "Jack", "5", "3", "Queen", "9", "10",
+    "9", "7", "2", "9", "Queen", "6", "7", "4", "Jack", "Ace", "6", "8", "2",
+    "10", "Ace", "5", "Queen", "10"];
 
   // Finds the index of the card we wasnt
   ind = 0;
@@ -141,6 +141,68 @@ function solve()
   final.style.display = "none";
 }
 
+// If input isn't valid, error message is displayed, else trick continues
+function valid() {
+  var invalid = false;
+
+  cards = document.getElementById("user_input").value;
+  console.log(cards);
+
+  var cur = 0;
+  var removed = 0;
+
+  freq = new Map();
+  for (var i = 0; i < cards.length; i++) {
+    freq[cards[i]]++;
+    if(cards[i] != '.' && (cards[i] > '5' || cards[i] < '1')) {
+      invalid = true;
+    }
+  }
+
+  if(freq['.'] < 2) {
+    invalid = true;
+  }
+
+  if(! invalid) {
+    while(cards[cur] != '.') {
+
+      if((cards[cur]-'0') > 5-removed) {
+        invalid = true;
+      }
+
+      cur++
+      removed++;
+    }
+
+    while(cards[cur] != '.') {
+
+      if((cards[cur]-'0') > 5-removed) {
+        invalid = true;
+      }
+
+      cur++
+      removed++;
+    }
+
+    cur++;
+    if(cur >= cards.length) {
+      invalid = true;
+    }
+    else if(cards[cur] == '.' || (cards[cur]-'0') > 5-removed) {
+      invalid = true;
+    }
+  }
+
+  if(invalid) {
+    error_msg = "The input sequence is invalid. Please enter another code.";
+    document.getElementById("user_input").value = "";
+    document.getElementById("user_input").placeholder = error_msg;
+  }
+  else {
+    hide();
+  }
+}
+
 // Outputs random answer
 function random() {
   ans = "";
@@ -220,8 +282,6 @@ function reveal() {
 
 // Hide input box for user
 function hide() {
-  cards = document.getElementById("user_input").value
-
   var img = document.getElementById("wiz");
   img.style.display = "block";
 

@@ -10,19 +10,19 @@
   <p>&nbsp;</p>
 
   <!-- Intro GIF -->
-  <img class="image" src="wizard.gif", height = 200, width = 160/><img>
+  <img id = "wiz" class="image" src="wizard.gif", height = 200, width = 160/><img>
 
   <p style = "color: #535353", class = "cursive">
     <b>
-     Welcome! I'm a wizard trapped in the internet. Don't believe me? I can
-     guess your card...
+     Welcome! I'm a wizard trapped in the internet. Don't believe me? I will
+     tell you your card!
     </b>
   </p>
 
   <!-- Create fake guess button -->
   <p id = "fake_btn" class = btn style = "display: block">
       <script type="text/javascript" src="sequence.js"></script>
-      <button class="sequence", onclick="random()">Guess!</button>
+      <button class="sequence", onclick="random()">Tell me my card!</button>
   </p>
 
   <!-- Take input -->
@@ -34,19 +34,19 @@
   <!-- Create real guess button -->
   <p id = "real_btn" class = btn style = "display: none">
       <script type="text/javascript" src="sequence.js"></script>
-      <button class="sequence", onclick="hide()">Guess!</button>
+      <button class="sequence", onclick="hide()">Enter</button>
   </p>
 
   <!-- Create second real guess button for spectator -->
   <p id = "final_btn" class = btn style = "display: none">
       <script type="text/javascript" src="sequence.js"></script>
-      <button class="sequence", onclick="solve()">Guess!</button>
+      <button class="sequence", onclick="solve()">Tell me my card!</button>
   </p>
 
   <!-- Print output -->
-  <p class = text_box>
+  <p id="res" class = text_box>
       <input id="result", style="font-size:25px", type = "text", size = "50",
-      placeholder="Hmmm... your card is the...">
+      placeholder="Hmmm... your card is...">
   </p>
 
   <p>&nbsp;</p>

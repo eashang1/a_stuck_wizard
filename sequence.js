@@ -71,7 +71,7 @@ function solve()
     left_over = new Set();
     while(cards[cur] != '.') {
       var val = (cards[cur]-'0');
-      for (var j = 1; j < val; j++) {
+      for (var j = 1; j <= val; j++) {
         if(!remaining.has(j)) {
           val++;
         }
@@ -110,7 +110,7 @@ function solve()
     del = new Set();
     while(cards[cur] != '.') {
       var val = (cards[cur]-'0');
-      for (var j = 1; j < val; j++) {
+      for (var j = 1; j <= val; j++) {
         if(!remaining.has(j)) {
           val++;
         }
@@ -124,7 +124,6 @@ function solve()
     });
 
     var res = remaining.values().next().value;
-
     if(!done) {
       ind = (i+res-1)%52;
       suit_ans = de_bruijn[ind];
@@ -287,7 +286,7 @@ function valid() {
       left_over = new Set();
       while(cards[cur] != '.') {
         var val = (cards[cur]-'0');
-        for (var j = 1; j < val; j++) {
+        for (var j = 1; j <= val; j++) {
           if(!remaining.has(j)) {
             val++;
           }
@@ -326,7 +325,7 @@ function valid() {
       del = new Set();
       while(cards[cur] != '.') {
         var val = (cards[cur]-'0');
-        for (var j = 1; j < val; j++) {
+        for (var j = 1; j <= val; j++) {
           if(!remaining.has(j)) {
             val++;
           }

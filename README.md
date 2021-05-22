@@ -24,7 +24,7 @@ Performing the trick:
 
 7) Press "Enter" or hit the "Enter" key and give your laptop to the spectator. Upon clicking the "Tell me my card!" button, the website will output the card.
 
-*If you memorize the sequence from steps 4-6, you can input it all once under the guise of pulling up the website, and then pass the laptop to the spectator
+*If you memorize the sequence from steps 4-6, you can input it all once under the guise of pulling up the website, and then pass the laptop to the spectator.
 
 These instructions are better illustrated with an example:
 

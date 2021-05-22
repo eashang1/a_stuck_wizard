@@ -1,9 +1,9 @@
 # Sledgehammer Stack
-Uses a De Bruijn sequence arrangement of a deck of cards to perform a magic trick
+Uses a de Bruijn sequence arrangement of a deck of cards to perform a magic trick
 
 Before the trick:
 
-1) Prearrange your deck in the order listed here: https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing
+1) Arrange your deck in the order listed here: https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing
 
 2) Go to https://eashang1.github.io/sledgehammer_stack and press 'w' to get to the page that will take input.
 

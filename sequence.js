@@ -23,8 +23,16 @@ function solve()
   var ind = -1;
   var suit_ans = -1;
 
-  if(cards[cards.length-1] != '.') {
+  var cnt_ends = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if(cards[i] == '.') {
+      cnt_ends++;
+    }
+  }
+
+  while(cnt_ends < 3) {
     cards += '.';
+    cnt_ends++;
   }
 
   for (var i = 0; i < de_bruijn.length; i++) {
@@ -125,6 +133,8 @@ function solve()
 
     var res = remaining.values().next().value;
     if(!done) {
+      console.log(i);
+
       ind = (i+res-1)%52;
       suit_ans = de_bruijn[ind];
     }
@@ -163,8 +173,16 @@ function format() {
   var invalid = false;
   cards = document.getElementById("user_input").value;
 
-  if(cards[cards.length-1] != '.') {
+  var cnt_ends = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if(cards[i] == '.') {
+      cnt_ends++;
+    }
+  }
+
+  while(cnt_ends < 3) {
     cards += '.';
+    cnt_ends++;
   }
 
   if(cards.length < 3) {
@@ -191,7 +209,6 @@ function format() {
     var first = 0;
     if(!invalid) {
       while(cards[cur] != '.') {
-
         if((cards[cur]-'0') > 5-removed) {
           invalid = true;
         }
@@ -243,107 +260,103 @@ function valid() {
   for (var i = 0; i < de_bruijn.length; i++) {
     var done = false;
 
-    for (var i = 0; i < de_bruijn.length; i++) {
-      var done = false;
-
-      // Checks color
-      // Creates a set of the removed cards and makes sure they are the same
-      // parity (and that those cards not in the set are also the same parity)
-      var cur = 0;
-      var parity = -1;
-      var locations = new Set();
-      var remaining = new Set([1,2,3,4,5])
-      while(cards[cur] != '.') {
-        locations.add(cards[cur]-'0');
-        remaining.delete(cards[cur]-'0');
-        parity = de_bruijn[(i+(cards[cur]-'0')-1)%52]%2;
-        cur++;
-      }
-
-      if(parity != -1) {
-        for (var j = 1; j <= 5; j++) {
-          cur_card = de_bruijn[(i+j-1)%52];
-          if(locations.has(j)) {
-            if(cur_card%2 != parity) {
-              done = true;
-            }
-          }
-          else {
-            if(cur_card%2 == parity) {
-              done = true;
-            }
-          }
-        }
-      }
-
-      // Check suits
-      // Creates a set of the removed cards and makes sure they are the same
-      // suit (and that those cards not in the set that were not previously
-      // removed are also the same parity)
+    // Checks color
+    // Creates a set of the removed cards and makes sure they are the same
+    // parity (and that those cards not in the set are also the same parity)
+    var cur = 0;
+    var parity = -1;
+    var locations = new Set();
+    var remaining = new Set([1,2,3,4,5])
+    while(cards[cur] != '.') {
+      locations.add(cards[cur]-'0');
+      remaining.delete(cards[cur]-'0');
+      parity = de_bruijn[(i+(cards[cur]-'0')-1)%52]%2;
       cur++;
-      var suit = -1;
-      locations.clear();
-      left_over = new Set();
-      while(cards[cur] != '.') {
-        var val = (cards[cur]-'0');
-        for (var j = 1; j <= val; j++) {
-          if(!remaining.has(j)) {
-            val++;
-          }
-        }
-        locations.add(val);
-        suit = de_bruijn[(i+val-1)%52];
-        cur++;
-      }
+    }
 
+    if(parity != -1) {
       for (var j = 1; j <= 5; j++) {
         cur_card = de_bruijn[(i+j-1)%52];
         if(locations.has(j)) {
-          remaining.delete(j);
-          if(cur_card != suit) {
+          if(cur_card%2 != parity) {
             done = true;
           }
         }
         else {
-          if(remaining.has(j)) {
-            left_over.add(cur_card);
-            if(cur_card == suit) {
-              done = true;
-            }
+          if(cur_card%2 == parity) {
+            done = true;
           }
         }
       }
+    }
 
-      if(left_over.size > 1) {
-        done = true;
+    // Check suits
+    // Creates a set of the removed cards and makes sure they are the same
+    // suit (and that those cards not in the set that were not previously
+    // removed are also the same parity)
+    cur++;
+    var suit = -1;
+    locations.clear();
+    left_over = new Set();
+    while(cards[cur] != '.') {
+      var val = (cards[cur]-'0');
+      for (var j = 1; j <= val; j++) {
+        if(!remaining.has(j)) {
+          val++;
+        }
       }
-
-      // Sets index
-      // If previous conditions are met, we have a match, so we get the index of
-      // our desired card
+      locations.add(val);
+      suit = de_bruijn[(i+val-1)%52];
       cur++;
-      del = new Set();
-      while(cards[cur] != '.') {
-        var val = (cards[cur]-'0');
-        for (var j = 1; j <= val; j++) {
-          if(!remaining.has(j)) {
-            val++;
+    }
+
+    for (var j = 1; j <= 5; j++) {
+      cur_card = de_bruijn[(i+j-1)%52];
+      if(locations.has(j)) {
+        remaining.delete(j);
+        if(cur_card != suit) {
+          done = true;
+        }
+      }
+      else {
+        if(remaining.has(j)) {
+          left_over.add(cur_card);
+          if(cur_card == suit) {
+            done = true;
           }
         }
-        del.add(val);
-        cur++;
       }
+    }
 
-      del.forEach((item) => {
-        remaining.delete(item);
-      });
+    if(left_over.size > 1) {
+      done = true;
+    }
 
-      var res = remaining.values().next().value;
-
-      if(!done) {
-        ind = (i+res-1)%52;
-        suit_ans = de_bruijn[ind];
+    // Sets index
+    // If previous conditions are met, we have a match, so we get the index of
+    // our desired card
+    cur++;
+    del = new Set();
+    while(cards[cur] != '.') {
+      var val = (cards[cur]-'0');
+      for (var j = 1; j <= val; j++) {
+        if(!remaining.has(j)) {
+          val++;
+        }
       }
+      del.add(val);
+      cur++;
+    }
+
+    del.forEach((item) => {
+      remaining.delete(item);
+    });
+
+    var res = remaining.values().next().value;
+
+    if(!done) {
+      ind = (i+res-1)%52;
+      suit_ans = de_bruijn[ind];
     }
   }
 

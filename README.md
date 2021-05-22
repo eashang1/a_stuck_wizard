@@ -16,11 +16,11 @@ Performing the trick:
 
 3) Now have the spectator fan out the cards so that they can see them all (and you can see the backs). The card closest to you is #5, and the one the furthest from you is #1.
 
-4) Have the spectator remove the cards of the less common color from their hand and enter the corresponding positions followed by a '.'.
+4) Have the spectator remove the cards of the less common color from their hand, then enter the corresponding positions followed by a '.'.
 
-5) Have the spectator remove the cards of a suit of their choice from their hand (so that it is not empty afer removal) and enter the corresponding positions followed by a '.'.
+5) Have the spectator remove the cards of a suit of their choice from their hand (so that it is not empty afer removal), then enter the corresponding positions followed by a '.'.
 
-6) Have a spectator pick one of their remaining cards and enter the corresponding position (the '.' delimiter at the end is optional).
+6) Have a spectator pick one of their remaining cards, then enter the corresponding position (the '.' delimiter at the end is optional).
 
 7) Press "Enter" or hit the "Enter" key and give your laptop to the spectator. Upon clicking the "Tell me my card!" button, the website will output the card.
 

@@ -1,7 +1,7 @@
 # de Bruijn Magic
 Uses a de Bruijn sequence arrangement of a deck of cards to perform a magic trick
 
-# Sledgehammer Version
+## Sledgehammer Version
 
 Before the trick:
 
@@ -32,7 +32,7 @@ These instructions are better illustrated with an example:
 
 Suppose the spectator picks the hand JS, 7S, 4C, 2C, 3D. Note that the Jack would be closes to you when the spectator fans out the cards, so this is #1. In the first step the spectator would remove the red cards, so their hand would become JS, 7S, 4C, 2C. As they removed the card in the fifth position, you would enter '5.'. Next suppose they choose to remove the spades. Their hand would then become 4C, 2C. They removed the cards at the first two positions, so you would enter '12.' (or '21.'). Finally suppose the spectator chooses the 2C. The spectator would remove the 4C a the first position, so you would enter '1' (as the delimiter is optional). Your final input would be '5.12.1'. Once you press enter, give the laptop to the spectator, and they press the "Tell me my card!" button, the output will be "The two of Clubs!"
 
-# Poker Version
+## Poker Version
 
 Before the trick:
 

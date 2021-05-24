@@ -42,7 +42,7 @@ Before the trick:
 
 3) Go to https://eashang1.github.io/sledgehammer_stack
 
-4) Press 'p' to tell the website you are using the 50 card stack (this can be toggled back to the 52 to card stack by entering 's') and then hit 'w' to get to the page that takes input
+4) Press 'p' to tell the website you are using the 50 card stack (this can be toggled back to the 52 to card stack by entering 's') and then hit 'w' to get to the page that takes input.
 
 During the trick: 
 

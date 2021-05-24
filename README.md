@@ -48,6 +48,6 @@ During the trick:
 
 1) Let the spectator cut the deck (take some portion off the top and move it to the bottom) as many times as they want.
 
-2) Deal out five hands of five, and let the spectator pick any hand. The card closest to you is #1, and the one the furthest from you is #5.
+2) Deal out five hands of five, and let the spectator pick any hand. The card closest to you is #5, and the one the furthest from you is #1.
 
 3) Follow the steps for the Sledgehammer Version from step 3 onwards.

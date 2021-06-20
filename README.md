@@ -1,11 +1,14 @@
 # de Bruijn Magic
 Uses a de Bruijn sequence arrangement of a deck of cards to perform a magic trick
 
+<img src="https://user-images.githubusercontent.com/53799135/122691030-0a9d2780-d1fb-11eb-9b32-336cef58e913.png" alt="drawing" width="750px"/>
+
+
 ## Sledgehammer Version
 
 Before the trick:
 
-1) Arrange your deck in the order listed here: https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing
+1) Arrange your deck in the order listed [here](https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing)
 
 2) Go to https://eashang1.github.io/a_stuck_wizard/ and press 'w' to get to the page that will take input.
 
@@ -36,7 +39,7 @@ Suppose the spectator picks the hand JS, 7S, 4C, 2C, 3D. Note that the Jack woul
 
 Before the trick:
 
-1) Arrange your deck in the order listed here: https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing
+1) Arrange your deck in the order listed [here](https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing)
 
 2) Remove cards 8 and 26 (the 10H and QS).
 

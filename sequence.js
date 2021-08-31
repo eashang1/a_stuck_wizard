@@ -715,20 +715,22 @@ document.addEventListener('keydown', function(e) {
   }
 })
 
-var onlongtouch;
-var timer;
-var touchduration = 5;
-function touchstart() {
-    timer = setTimeout(onlongtouch, touchduration);
+var touchStartTimeStamp = 0;
+var touchEndTimeStamp   = 0;
+window.addEventListener('touchstart', onTouchStart, false);
+window.addEventListener('touchend', onTouchEnd, false);
+function onTouchStart(e) {
+    touchStartTimeStamp = e.timeStamp;
 }
-function touchend() {
-    if (timer)
-        clearTimeout(timer);
+function onTouchEnd(e) {
+    touchEndTimeStamp = e.timeStamp;
+    console.log(touchEndTimeStamp - touchStartTimeStamp);
+    if(touchEndTimeStamp - touchStartTimeStamp >= 3000) {
+      reveal();
+      toggled = true;
+    }
 }
-onlongtouch = function() {
-  reveal();
-  toggled = true;
-};
+
 
 // Allows user to use 'Enter' button
 document.addEventListener('keydown', function(f) {

@@ -400,7 +400,7 @@ function format() {
   }
 
   if(invalid) {
-    error_msg = "The input sequence is invalid. Please enter another code.";
+    error_msg = "Invalid sequence. Please try again.";
     document.getElementById("user_input").value = "";
     document.getElementById("user_input").placeholder = error_msg;
   }
@@ -522,7 +522,7 @@ function valid() {
   }
 
   if(ind == -1) {
-    error_msg = "The input sequence is invalid. Please enter another code.";
+    error_msg = "Invalid sequence!.";
     document.getElementById("user_input").value = "";
     document.getElementById("user_input").placeholder = error_msg;
   }
@@ -657,7 +657,7 @@ function valid_poker() {
   }
 
   if(ind == -1) {
-    error_msg = "The input sequence is invalid. Please enter another code.";
+    error_msg = "Invalid sequence. Please try again.";
     document.getElementById("user_input").value = "";
     document.getElementById("user_input").placeholder = error_msg;
   }

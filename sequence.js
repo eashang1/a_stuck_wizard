@@ -715,12 +715,20 @@ document.addEventListener('keydown', function(e) {
   }
 })
 
-window.addEventListener('click', function (evt) {
-    if (evt.detail === 3) {
-      reveal();
-      toggled = true;
-    }
-});
+var onlongtouch;
+var timer;
+var touchduration = 5;
+function touchstart() {
+    timer = setTimeout(onlongtouch, touchduration);
+}
+function touchend() {
+    if (timer)
+        clearTimeout(timer);
+}
+onlongtouch = function() {
+  reveal();
+  toggled = true;
+};
 
 // Allows user to use 'Enter' button
 document.addEventListener('keydown', function(f) {

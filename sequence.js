@@ -715,6 +715,13 @@ document.addEventListener('keydown', function(e) {
   }
 })
 
+window.addEventListener('click', function (evt) {
+    if (evt.detail === 3) {
+      reveal();
+      toggled = true;
+    }
+});
+
 // Allows user to use 'Enter' button
 document.addEventListener('keydown', function(f) {
   if(f.key === 'Enter' && toggled) {

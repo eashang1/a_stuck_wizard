@@ -10,7 +10,7 @@ Before the trick:
 
 1) Arrange your deck in the order listed [here](https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing)
 
-2) Go to https://eashang1.github.io/a_stuck_wizard/ and press 'w' to get to the page that will take input.
+2) Go to https://eashang1.github.io/a_stuck_wizard/ and press 'w' or triple-click to get to the page that will take input.
 
 
 Performing the trick:

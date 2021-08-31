@@ -725,7 +725,7 @@ function onTouchStart(e) {
 function onTouchEnd(e) {
     touchEndTimeStamp = e.timeStamp;
     console.log(touchEndTimeStamp - touchStartTimeStamp);
-    if(touchEndTimeStamp - touchStartTimeStamp >= 3000) {
+    if(touchEndTimeStamp - touchStartTimeStamp >= 5000) {
       reveal();
       toggled = true;
     }

@@ -1,5 +1,9 @@
 html {
   background-image: linear-gradient(#ffe6e6,#ffffcc);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .image {

@@ -1,7 +1,7 @@
 # de Bruijn Magic
 Uses a de Bruijn sequence arrangement of a deck of cards to perform a magic trick
 
-<img src="https://user-images.githubusercontent.com/53799135/131556495-d2c29dd2-1fe2-4447-8f9e-25464d8fb592.png" alt="drawing" width="750px"/>
+<img src="https://user-images.githubusercontent.com/53799135/131557593-987fbd2e-3142-4fc6-a7b9-7a0deab97fda.png" alt="drawing" width="750px"/>
 
 
 ## Sledgehammer Version

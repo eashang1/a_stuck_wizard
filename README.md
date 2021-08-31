@@ -1,7 +1,7 @@
 # de Bruijn Magic
 Uses a de Bruijn sequence arrangement of a deck of cards to perform a magic trick
 
-<img src="https://user-images.githubusercontent.com/53799135/131555448-7533c901-57f4-437f-9bf6-057dacb367d8.png" alt="drawing" width="750px"/>
+<img src="https://user-images.githubusercontent.com/53799135/131556495-d2c29dd2-1fe2-4447-8f9e-25464d8fb592.png" alt="drawing" width="750px"/>
 
 
 ## Sledgehammer Version
@@ -10,7 +10,7 @@ Before the trick:
 
 1) Arrange your deck in the order listed [here](https://docs.google.com/document/d/1KnhTf7GuQRqbklYCb3yejZ6yp79OneqwasQUdjZT0sQ/edit?usp=sharing)
 
-2) Go to https://eashang1.github.io/a_stuck_wizard/ and press 'w' or triple-click to get to the page that will take input.
+2) Go to https://eashang1.github.io/a_stuck_wizard/ and press 'w' or quintuple-click to get to the page that will take input.
 
 
 Performing the trick:
